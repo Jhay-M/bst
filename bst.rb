@@ -100,9 +100,18 @@ class Tree
   end
 
   def find(val, node = root)
+    return 'Not Found' if node.nil?
     return node if val == node.data
+
+    if val < node.data
+      find(val, node.left)
+    elsif val > node.data
+      find(val, node.right)
+    end
   end
+
+  
 end
 
 jhay = Tree.new([3, 5, 7, 2, 1, 4, 6, 8])
-p jhay.delete(8)
+p jhay
