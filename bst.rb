@@ -1,4 +1,3 @@
-require 'pry'
 class Node
   include Comparable
   attr_accessor :data, :left, :right
@@ -110,7 +109,22 @@ class Tree
     end
   end
 
-  
+  def level_order(node = root)
+    queue = []
+    queue << node
+    result = traverse(queue)
+    result.map!(&:data)
+  end
+
+  def traverse(arr, arr2 = [])
+    return arr2 if arr.empty?
+
+    arr2 << arr[0]
+    arr << arr[0].left unless arr[0].left.nil?
+    arr << arr[0].right unless arr[0].right.nil?
+    arr.shift
+    traverse(arr, arr2)
+  end
 end
 
 jhay = Tree.new([3, 5, 7, 2, 1, 4, 6, 8])
