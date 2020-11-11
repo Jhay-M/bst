@@ -185,10 +185,29 @@ class Tree
     @arr = new_arr
     @root = build_tree(arr)
   end
+
+  def pretty_print(node = root, prefix = '', is_left = true)
+    pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
+    puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
+    pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
+  end
 end
 
-jhay = Tree.new([3, 5, 7, 2, 1, 4, 6, 8])
-jhay.insert(9)
+gen_arr = Array.new(15) { rand(1..100) }
+jhay = Tree.new(gen_arr)
 p jhay.balanced?
-p jhay.rebalance
-p jhay
+p "Level Order Sequence: #{jhay.level_order}"
+p "Pre-Order Sequence: #{jhay.preorder}"
+p "In-Order Sequence: #{jhay.inorder}"
+p "Post-Order Sequence: #{jhay.postorder}"
+jhay.insert(105)
+jhay.insert(340)
+jhay.insert(273)
+p jhay.balanced?
+jhay.rebalance
+p jhay.balanced?
+p "Level Order Sequence: #{jhay.level_order}"
+p "Pre-Order Sequence: #{jhay.preorder}"
+p "In-Order Sequence: #{jhay.inorder}"
+p "Post-Order Sequence: #{jhay.postorder}"
+jhay.pretty_print
