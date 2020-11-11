@@ -179,7 +179,16 @@ class Tree
 
     true
   end
+
+  def rebalance(node = root)
+    new_arr = level_order(node)
+    @arr = new_arr
+    @root = build_tree(arr)
+  end
 end
 
 jhay = Tree.new([3, 5, 7, 2, 1, 4, 6, 8])
+jhay.insert(9)
+p jhay.balanced?
+p jhay.rebalance
 p jhay
