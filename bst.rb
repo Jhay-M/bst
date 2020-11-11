@@ -152,6 +152,33 @@ class Tree
     arr << node.data
     arr
   end
+
+  def depth(val, node = root)
+    sum = 1
+    until val == node.data
+      node = node.left if val < node.data
+      node = node.right if val > node.data
+      sum += 1
+    end
+    sum
+  end
+
+  def height(val)
+    node = find(val)
+    sum = 0
+    until node.nil?
+      node = node.right
+      sum += 1
+    end
+    sum
+  end
+
+  def balanced?(node = root)
+    return nil if node.nil?
+    return false if height(node.right.data) - height(node.left.data) > 1
+
+    true
+  end
 end
 
 jhay = Tree.new([3, 5, 7, 2, 1, 4, 6, 8])
